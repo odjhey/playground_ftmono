@@ -1,15 +1,11 @@
-# Boilerplate
-
-## Server
-    1. typescript 3.6.4, babel 7.6.4
-    1. gql 14.5.8, apollo 2.9.6
-    1. mongo, mongoose
-
-## Client
-    1. react 16.10.2
-    1. react native 61.2
-    1. react native elements 1.2.6
-    1. storybook 5.2.3
-
-## TODO
-    1. add react-navigation
+# Denden Camera
+## Steps
+1. install @root `yarn` or `npm i`
+1. go to server `cd server`
+1. `yarn` or `npm i`
+1. `yarn start` to start server
+1. go to app `cd ../app`
+1. install react-native cli `yarn` or `npm i`
+1. `cd components`
+1. install app `yarn` or `npm i`
+1. run! `yarn android` or `npm run android`
