@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<S> UserProfile UserItem Renders 1`] = `
+<Themed.ListItem
+  leftAvatar={
+    <Themed.Avatar
+      onPress={[Function]}
+      rounded={true}
+      title="O"
+    />
+  }
+  rightElement={
+    <View>
+      <Themed.Badge
+        status="error"
+        value="Online Status"
+      />
+    </View>
+  }
+  title="Name"
+/>
+`;
+
+exports[`UserProfile Rendering UserItem Renders 1`] = `
+<Themed.ListItem
+  leftAvatar={
+    <Themed.Avatar
+      onPress={[Function]}
+      rounded={true}
+      title="O"
+    />
+  }
+  rightElement={
+    <View>
+      <Themed.Badge
+        status="error"
+        value="Online Status"
+      />
+    </View>
+  }
+  title="Name"
+/>
+`;

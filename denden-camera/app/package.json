@@ -1,0 +1,9 @@
+{
+  "name": "cccomps",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "react-native-cli": "^2.0.1"
+  }
+}
