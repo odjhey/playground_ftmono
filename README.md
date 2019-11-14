@@ -5,6 +5,8 @@
 1. `clone` your `fork`
 1. create `directory` here in your `fork`'s `root` dir
 1. `copy` `paste` your working example
+1. `cd` to your folder
+1. delete/`rm` `.git` folder
 1. `git add <dir>`
 1. `git commit 'add ______ example'`
 1. `git push origin master`
