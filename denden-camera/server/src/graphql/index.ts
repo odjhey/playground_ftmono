@@ -107,6 +107,7 @@ const resolvers = {
     uploadFile: async (_, { file }) => {
       const { fileName } = await file;
 
+      console.log("creating file", fileName);
       writeFile(
         path.join(__dirname, "../images", fileName),
         file.data,
