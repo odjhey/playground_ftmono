@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import {
   Image,
   PixelRatio,
@@ -94,15 +94,18 @@ const styles = StyleSheet.create({
 });
 
 const ImageWrapper = observer(props => {
-  const { loading, store, data, setQuery } = useQuery();
+  const { loading, store, data, error, setQuery } = useQuery();
   const { author, title, checkin, id } = props;
 
   return (
-    <Button
-      title="Save"
-      onPress={() => {
-        console.log(props.response);
-        setQuery(store.mutateUploadFile({ file: props.response }));
-      }}></Button>
+    <Fragment>
+      <Button
+        title="Save"
+        onPress={() => {
+          console.log(props.response);
+          setQuery(store.mutateUploadFile({ file: props.response }));
+        }}></Button>
+      {error ? <View>{error.messages}</View> : null}
+    </Fragment>
   );
 });
