@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, TextInput } from 'react-native'
+import { View, ScrollView, TextInput } from 'react-native'
 import { Button, Text } from 'react-native-elements'
 import { Formik, getIn, FieldArray, Field } from 'formik'
 import * as Yup from 'yup'
@@ -33,11 +33,19 @@ const data: Array<item> = [
     key: '2',
     name: 'another naem',
   },
+  {
+    key: '3',
+    name: 'another naem',
+  },
+  {
+    key: '9',
+    name: 'another naem',
+  },
 ]
 
 export const MyReactNativeForm = (props: any) => {
   return (
-    <View>
+    <ScrollView>
       <Formik
         initialValues={{ items: data }}
         validationSchema={ItemSchema}
@@ -49,7 +57,7 @@ export const MyReactNativeForm = (props: any) => {
               render={fArrayBag => {
                 return values.items.map((item, i) => (
                   <View
-                    key={item.key}
+                    key={i}
                     style={{
                       elevation: 3,
                       padding: 2,
@@ -63,6 +71,7 @@ export const MyReactNativeForm = (props: any) => {
                       onBlur={handleBlur(`items[${i}].key`)}
                       value={item.key}
                     />
+                    <ErrorMessage name={`items[${i}.key]`}></ErrorMessage>
                     <TextInput
                       onChangeText={handleChange(`items[${i}].name`)}
                       onBlur={handleBlur(`items[${i}].name`)}
@@ -74,6 +83,7 @@ export const MyReactNativeForm = (props: any) => {
                       onBlur={handleBlur(`items[${i}].other`)}
                       value={item.other}
                     />
+                    <ErrorMessage name={`items[${i}.other]`}></ErrorMessage>
                   </View>
                 ))
               }}></FieldArray>
@@ -81,7 +91,7 @@ export const MyReactNativeForm = (props: any) => {
           </View>
         )}
       </Formik>
-    </View>
+    </ScrollView>
   )
 }
 
