@@ -1,117 +1,86 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
-
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+import {ScrollView, View, Text, TextInput} from 'react-native';
+import {createHttpClient} from 'mst-gql';
+import {observer} from 'mobx-react';
+import {RootStore, StoreContext} from './src/models';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import {useQuery} from './src/models';
+
+const rootStore = RootStore.create(undefined, {
+  gqlHttpClient: createHttpClient('http://localhost:4000/graphql'),
+});
+
+// @ts-ignore.
+global.store = rootStore;
 
 const App = () => {
-  const usingHermes = typeof HermesInternal === 'object' && HermesInternal !== null;
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {!usingHermes ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </>
+    <StoreContext.Provider value={rootStore}>
+      <Main></Main>
+    </StoreContext.Provider>
   );
 };
 
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
+const Main = observer(() => {
+  const {loading, data, error} = useQuery(store => store.retrieveComments());
+
+  if (loading) {
+    return <Text>Loading</Text>;
+  }
+
+  if (error) {
+    return <Text>error.messages</Text>;
+  }
+
+  return (
+    <ScrollView>
+      {data?.comments.map((comment, i) => (
+        <Reply key={i} comment={comment}></Reply>
+      ))}
+      <View style={{padding: 2}}>
+        <TextInput
+          style={{
+            marginBottom: 5,
+            padding: 2,
+            borderColor: '#0fafff',
+            borderStyle: 'solid',
+            borderWidth: 1,
+          }}></TextInput>
+        <TextInput
+          style={{
+            borderColor: '#ffafff',
+            borderStyle: 'solid',
+            borderWidth: 1,
+          }}></TextInput>
+      </View>
+    </ScrollView>
+  );
 });
+
+const Reply = props => {
+  const {id, message, replyTo} = props.comment;
+  return (
+    <View
+      style={{
+        margin: 5,
+        padding: 2,
+        borderColor: '#999',
+        borderStyle: 'solid',
+        borderWidth: 1,
+      }}>
+      {replyTo ? (
+        <View style={{backgroundColor: '#eee'}}>
+          <Text>
+            <Text style={{color: '#ABC'}}>{replyTo.id}</Text>
+            <Text> </Text>
+            <Text style={{color: '#888'}}>{replyTo.message}</Text>
+          </Text>
+        </View>
+      ) : null}
+      <Text>{id}</Text>
+      <Text>{message}</Text>
+    </View>
+  );
+};
 
 export default App;
