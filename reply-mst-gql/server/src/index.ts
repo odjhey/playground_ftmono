@@ -1,25 +1,7 @@
 import { ApolloServer, gql } from "apollo-server";
 import mongoose from "mongoose";
-import { ObjectID } from "mongodb";
 
-const Schema = mongoose.Schema;
-ObjectID.prototype.valueOf = function() {
-  return this.toString();
-};
-
-const CommentSchema = new Schema(
-  {
-    message: {
-      type: String
-    },
-    replyToID: {
-      type: String
-    }
-  },
-  { timestamps: true }
-);
-
-const commentModel = mongoose.model("Comment", CommentSchema);
+import commentModel from "./mongo-models/models/Comment";
 
 const typeDefs = gql`
   type Comment {
