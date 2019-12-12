@@ -1,3 +1,4 @@
+import { IDBModel } from "../commons/types";
 import { createUCCreateComment } from "../core";
 
 const createCreateCommentDB = (db: IDBModel<any>) => async comment => {

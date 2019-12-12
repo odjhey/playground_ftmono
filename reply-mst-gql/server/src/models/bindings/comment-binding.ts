@@ -1,3 +1,4 @@
+import { IDBModel } from "../../commons/types";
 import { Comment } from "../mongo-models";
 
 const commentModel: IDBModel<any> = {
