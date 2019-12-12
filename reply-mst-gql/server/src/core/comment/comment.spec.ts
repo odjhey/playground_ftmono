@@ -2,7 +2,7 @@ import { createMakeComment } from "./comment";
 
 const makeComment = createMakeComment();
 
-describe("core/lcomments", () => {
+describe("core/comments", () => {
   it("should be able to make a comment", () => {
     const given = { message: "hello" };
     const comment = makeComment(given);

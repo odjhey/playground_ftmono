@@ -3,7 +3,7 @@ import { createTestClient } from "apollo-server-testing";
 
 import { contructTestServer } from "../__utils";
 
-import { createCreateCommentDB } from "../../controllers/mock-index";
+import { createCreateCommentDB } from "../../controllers";
 import { IDBModel } from "../../commons/types";
 
 describe("mutations", () => {
