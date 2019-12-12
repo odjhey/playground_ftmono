@@ -1,14 +1,6 @@
-type TComment = {
-  message: string;
-};
+import { createMakeComment } from "./comment";
 
-const makeComment = (comment: TComment) => {
-  const { message } = comment;
-  if (!message) {
-    throw new Error("Message cannot be blank.");
-  }
-  return comment;
-};
+const makeComment = createMakeComment();
 
 describe("core/lcomments", () => {
   it("should be able to make a comment", () => {
