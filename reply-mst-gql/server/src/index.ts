@@ -1,7 +1,8 @@
 import { ApolloServer, gql } from "apollo-server";
 import mongoose from "mongoose";
 
-import * as core from "./controllers";
+import * as controllers from "./controllers";
+import { commentModel } from "./models";
 import { typeDefs, resolvers } from "./graphql";
 
 //mongoURI=mongodb://localhost:27017/sample1
@@ -10,10 +11,10 @@ mongoose
   .then(() => console.log("Mongo on"))
   .catch(err => console.log(err));
 
-const { createComment } = core;
+const { createCreateCommentDB } = controllers;
 const context = async session => {
   return {
-    createComment
+    createComment: createCreateCommentDB(commentModel)
   };
 };
 
@@ -30,7 +31,7 @@ server.listen().then(({ url }) => {
 
 // export all the important pieces for integration/e2e tests to use
 
-export { ApolloServer, typeDefs, resolvers, core };
+export { ApolloServer, typeDefs, resolvers, controllers };
 // dataSources,
 // context,
 // typeDefs,

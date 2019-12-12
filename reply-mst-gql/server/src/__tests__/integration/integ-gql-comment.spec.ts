@@ -1,10 +1,10 @@
 import { gql } from "apollo-server";
 import { createTestClient } from "apollo-server-testing";
 
-import { contructTestServer } from "./__utils";
+import { contructTestServer } from "../__utils";
 
-import { createCreateCommentDB } from "../controllers/mock-index";
-import { IDBModel } from "../commons/types";
+import { createCreateCommentDB } from "../../controllers/mock-index";
+import { IDBModel } from "../../commons/types";
 
 describe("mutations", () => {
   it("creates a comment", async () => {

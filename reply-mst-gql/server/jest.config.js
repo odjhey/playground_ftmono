@@ -4,7 +4,7 @@ module.exports = {
   transform: {
     "^.+\\.tsx?$": "ts-jest"
   },
-  testPathIgnorePatterns: ["/node_modules/", "/__utils", "/mock-data"],
+  testRegex: "((\\.|/)(test|spec))\\.[jt]sx?$",
   globals: {
     "ts-jest": {
       diagnostics: false
