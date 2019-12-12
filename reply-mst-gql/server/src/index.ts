@@ -1,7 +1,7 @@
 import { ApolloServer, gql } from "apollo-server";
 import mongoose from "mongoose";
 
-import commentModel from "./mongo-models/models/Comment";
+import { commentModel } from "./models";
 
 const typeDefs = gql`
   type Comment {
