@@ -9,5 +9,13 @@ module.exports = {
     "ts-jest": {
       diagnostics: false
     }
-  }
+  },
+  coverageReporters: [
+    "json",
+    "json-summary",
+    "text",
+    "html",
+    "lcov"
+    //"clover"
+  ]
 };
