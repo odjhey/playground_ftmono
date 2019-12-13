@@ -14,4 +14,11 @@ describe("core/comments", () => {
       makeComment(given);
     }).toThrow();
   });
+
+  //Reply
+  it("should be able to capture a reply", () => {
+    const given = { message: "this is a reply", replyTo: "1" };
+    const reply = makeComment(given);
+    expect(reply).toMatchObject({ message: "this is a reply", replyTo: "1" });
+  });
 });

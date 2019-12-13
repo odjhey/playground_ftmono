@@ -4,5 +4,7 @@
  */
 
 import { createUCCreateComment } from "./_usecases";
+import { createUCReplyComment } from "./_usecases";
 
 export { createUCCreateComment };
+export { createUCReplyComment };
